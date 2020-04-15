@@ -34,15 +34,20 @@ class Jeu
     public function resultats()
     {
         if($this->perso->vivant()){
-            $this->afficher($this->perso->getNom().' gagne avec '.$this->perso->getVie().' PV ');
+            $this->afficher($this->perso->getNom().' gagne avec '.$this->perso->getVie().' PV et '.$this->perso->gagnerExperience().$this->perso->getExperience().' XP ');
         }else{
-            $this->afficher($this->perso2->getNom().' gagne avec '.$this->perso2->getVie()." PV ");
+            $this->afficher($this->perso2->getNom().' gagne avec '.$this->perso2->getVie()." PV et gagne ".$this->perso2->gagnerExperience().$this->perso2->getExperience().' XP ');
         }
     }
     
     public function afficherMenaces(){
             $this->perso->menace();
             $this->perso2->menace();
+    }
+
+    public function afficherPresentation(){
+        $this->perso->presentation();
+        $this->perso2->presentation();
     }
 
     public function started(){

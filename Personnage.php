@@ -4,10 +4,18 @@ class Personnage{
     private $nom;
     private $vie = 100;
     private $menace ;
-     public function __construct(string $nom,string $menace)
+    private $presentation;
+    private $experience = 0;
+    private $gagnerExperience;
+    private $force = 50;
+
+ 
+
+     public function __construct(string $nom,string $menace, string $presentation)
      {
          $this->nom = $nom;
         $this->menace = $menace;
+        $this->presentation = $presentation;
      }
 
     public function parler(string $phrase)
@@ -22,18 +30,22 @@ class Personnage{
         $this->parler($this->menace);
     }
 
+    public function presentation(){
+        $this->parler($this->presentation);
+    }
+
     public function frapper(Personnage $perso)
     {
         if(!$this->vivant()){
             throw new Exception('Un personnage mort , ne peut pas frapper');
         }
-        $this->parler('je frappe '.$perso->nom);
+        $this->parler('je frappe '.$perso->nom.'<br>');
 
-        $degats = rand(1,100);
+        $degats = rand(1,35);
 
     $perso->vie = $perso->vie - $degats;
 
-    echo '# '.$perso->nom.' subit '.$degats." degats \n";
+    echo '# '.$perso->nom.' subit '.$degats." degats <br>";
     }
 
     public function vivant()
@@ -49,5 +61,20 @@ class Personnage{
     {
         return $this->nom;
     }
+
+    public function getForce()
+    {
+        return $this->force;
+    }
+
+    public function getExperience()
+    {
+        return $this->experience;
+    }
+
+     public function gagnerExperience()
+  {
+    $this->experience = $this->experience + 1;
+  }
 }
 

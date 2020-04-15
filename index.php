@@ -3,8 +3,8 @@ require 'boot.php';
 require 'Jeu.php';
 require 'Personnage.php';
 if(!isset($_SESSION['game'])){
-    $perso = new Personnage('Mike','philipe je sais ou tu te cache !, viens ici que je te bute ******');
-    $perso2 = new Personnage('Phillipe','salaud ! viens ici espece d******');
+    $perso = new Personnage('Mike','philipe je sais ou tu te cache !, viens ici que je te bute ******','je suis mike');
+    $perso2 = new Personnage('Phillipe','salaud ! viens ici espece d******','je suis phillipe');
     $jeu = new Jeu($perso,$perso2);
 }else{
     $jeu = unserialize($_SESSION['game']); 
