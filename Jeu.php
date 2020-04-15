@@ -3,74 +3,119 @@ class Jeu
 {
     public $perso;
     public $perso2;
+    public $randomiseur;
     public $tour = 0;
-    public function __construct(Personnage $perso, Personnage $perso2)
+    public $infostours = [];
+    
+    public function __construct(Personnage $perso, Personnage $perso2, Randomizer $randomiseur)
     {
         $this->perso = $perso;
         $this->perso2 = $perso2;
+        $this->randomiseur = $randomiseur;
     }
     
     public function tour()
     {
-        $piece = rand(1,2);
+        $subit_perso1 = 0;
+        $subit_perso2 = 0;
+        $piece = $this->randomiseur->rand(1,2);
         $this->tour = $this->tour+1;
-        $this->afficher('début du tour :'.$this->tour);
         try{
             if($piece == 1){
-                $this->perso->frapper($this->perso2);
-                $this->perso2->frapper($this->perso);
+                $subit_perso1 =  $this->perso->frapper($this->perso2);
+                $subit_perso2 =    $this->perso2->frapper($this->perso);
             }else{
-                $this->perso2->frapper($this->perso);
-                 $this->perso->frapper($this->perso2);
+                $subit_perso2 =    $this->perso2->frapper($this->perso);
+                $subit_perso1 =    $this->perso->frapper($this->perso2);
             }
             
             
         }catch (Exception $e){
-
+            
         }
-        $this->afficher('##############################################');
-    }
-    
-    public function resultats()
-    {
-        if($this->perso->vivant()){
-            $this->afficher($this->perso->getNom().' gagne avec '.$this->perso->getVie().' PV et '.$this->perso->gagnerExperience().$this->perso->getExperience().' XP ');
-        }else{
-            $this->afficher($this->perso2->getNom().' gagne avec '.$this->perso2->getVie()." PV et gagne ".$this->perso2->gagnerExperience().$this->perso2->getExperience().' XP ');
+        $this->afficher('##############################################<br>');
+        
+        $this->infostours[$this->tour] = [
+            "piece"=>$piece,
+            1 =>[
+                "degats" => $subit_perso1,
+                "vie" => $this->perso->getVie()
+            ],
+            2 =>[
+                "degats" => $subit_perso2,
+                "vie" => $this->perso2->getVie()
+                ]
+            ];
+            $this->afficherEtatdutour($this->infostours[$this->tour],$this->tour);
         }
-    }
-    
-    public function afficherMenaces(){
+        
+        public function resultats()
+        {
+            if($this->perso->vivant()){
+                $this->afficher($this->perso->getNom().' gagne avec '.$this->perso->getVie().' PV et '.$this->perso->gagnerExperience().$this->perso->getExperience().' XP ');
+            }else{
+                $this->afficher($this->perso2->getNom().' gagne avec '.$this->perso2->getVie()." PV et gagne ".$this->perso2->gagnerExperience().$this->perso2->getExperience().' XP ');
+            }
+            echo '<a href="https://lefevre.simplon-charleville.fr/projet_poo/index.php?seed='.$this->randomiseur->seed.'">revoir le match</a>';
+        }
+        
+        public function afficherMenaces(){
             $this->perso->menace();
             $this->perso2->menace();
-    }
-
-    public function afficherPresentation(){
-        $this->perso->presentation();
-        $this->perso2->presentation();
-    }
-
-    public function started(){
-        return $this->tour>0;
-    }
-    
-    public function ended(){
-        return !$this->perso->vivant() || !$this->perso2->vivant();
-    }
-    
-    
-    private function afficher(string $text)
-    {
-        echo ' # '.$text."\n";
-    }
+        }
+        
+        public function started(){
+            return $this->tour>0;
+        }
+        
+        public function ended(){
+            return !$this->perso->vivant() || !$this->perso2->vivant();
+        }
+        
+        
+        private function afficher(string $text)
+        {
+            echo $text."\n";
+        }
+        
+        public function afficherEtatdutour($etat,$numero)
+        {
+            if($etat['piece'] ==1){
+                $premierfrappeur = $this->perso;
+                $deuxiemefrappeur = $this->perso2;
+                $index1er = 1;
+                $index2eme = 2;
+            }else{
+                $premierfrappeur = $this->perso2;
+                $deuxiemefrappeur = $this->perso;
+                $index1er = 2;
+                $index2eme = 1;
+            }
+            echo ' tour: '.$numero.'<br>';
+            echo $premierfrappeur->getNom().': donne '.$etat[$index1er]['degats'].' degats '.' <br> ';
+            if($deuxiemefrappeur->vivant()){
+                echo $deuxiemefrappeur->getNom().' a encore : '.$etat[$index2eme]['vie'].' point de vie '.'<br><br>';
+                echo $deuxiemefrappeur->getNom().': donne '.$etat[$index2eme]['degats'].' degats '.' <br> ';
+                if($premierfrappeur->vivant()){
+                    echo $premierfrappeur->getNom().' a encore : '.$etat[$index1er]['vie'].' point de vie '.'<br><br>';
+                }else{
+                    echo $premierfrappeur->getNom().' est mort<br>';
+                }
+            }else{
+                echo $deuxiemefrappeur->getNom().' est mort<br>';
+            }
+        }
+        
+        
 }
-
-
-
-
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

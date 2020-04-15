@@ -2,14 +2,15 @@
 require 'boot.php';
 require 'Jeu.php';
 require 'Personnage.php';
+require 'Randomizer.php';
 if(!isset($_SESSION['game'])){
-    $perso = new Personnage('Mike','philipe je sais ou tu te cache !, viens ici que je te bute ******','je suis mike');
-    $perso2 = new Personnage('Phillipe','salaud ! viens ici espece d******','je suis phillipe');
-    $jeu = new Jeu($perso,$perso2);
+    $randomizer = new Randomizer($_GET['seed']??rand());
+    $perso = new Personnage('Mike','philipe je sais ou tu te cache !, viens ici que je te bute ******',$randomizer);
+    $perso2 = new Personnage('Phillipe','salaud ! viens ici espece d******',$randomizer);
+    $jeu = new Jeu($perso,$perso2,$randomizer);
 }else{
     $jeu = unserialize($_SESSION['game']); 
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +28,10 @@ if(!isset($_SESSION['game'])){
 
 <?php 
 if(isset($_POST['button'])){
+    foreach($jeu->infostours as $key => $etat ){
+        $jeu->afficherEtatdutour($etat,$key);
+    }
+
     $jeu->tour();
     if($jeu->ended()){
         $jeu->resultats();
