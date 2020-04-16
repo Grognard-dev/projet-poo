@@ -1,13 +1,12 @@
 <?php 
 
-class Personnage{
-    private $nom;
-    private $vie = 100;
-    private $menace ;
-    private $experience = 0;
-    private $gagnerExperience;
-    private $force = 50;
-    public $randomizer;
+abstract class Personnage{
+    protected $nom;
+    protected $vie = 100;
+    protected $menace ;
+    protected $experience = 0;
+    protected $gagnerExperience;
+    protected $randomizer;
     
     
     public function __construct(string $nom,string $menace, Randomizer $randomizer)
@@ -29,18 +28,21 @@ class Personnage{
         $this->parler($this->menace);
     }
     
-    public function frapper(Personnage $perso)
+    public function attaquer(Personnage $perso)
     {
         
         if(!$this->vivant()){
             throw new Exception('Un personnage mort , ne peut pas frapper');
         }
-        $degats = $this->randomizer->rand(1,35);
+        $degats = $this->degats($perso);
         
         $perso->vie = $perso->vie - $degats;
     
         return $degats;
     }
+
+    abstract public function degats(Personnage $perso);
+    
     
     public function vivant()
     {
@@ -56,11 +58,6 @@ class Personnage{
         return $this->nom;
     }
     
-    public function getForce()
-    {
-        return $this->force;
-    }
-    
     public function getExperience()
     {
         return $this->experience;
@@ -70,5 +67,10 @@ class Personnage{
     {
         $this->experience = $this->experience + 1;
     }
+
+  abstract  public function getDescription();
+
+  abstract public function getAttaque();
+
 }
 

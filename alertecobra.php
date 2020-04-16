@@ -1,15 +1,17 @@
 <?php
 require 'boot.php';
-require_once 'classes/Jeu.php';
-require_once 'classes/Magicien.php';
-require_once 'classes/Barbare.php';
-require_once 'classes/Randomizer.php';
+require 'classes/Jeu.php';
+require 'classes/Magicien.php';
+require 'classes/Barbare.php';
+require 'classes/Randomizer.php';
 
 
 
 if(!isset($_SESSION['game'])){
- header('location: index.php');
- die;
+    $randomizer = new Randomizer($_GET['seed']??rand());
+    $perso = new Magicien('Mike','philipe je sais ou tu te cache !, viens ici que je te bute ******',$randomizer);
+    $perso2 = new Barbare('Phillipe','salaud ! viens ici espece d******',$randomizer);
+    $jeu = new Jeu($perso,$perso2,$randomizer);
 }else{
     $jeu = unserialize($_SESSION['game']); 
 }
