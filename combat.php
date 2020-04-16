@@ -13,16 +13,19 @@ if(!isset($_SESSION['game'])){
 }else{
     $jeu = unserialize($_SESSION['game']); 
 }
+if(isset($_POST['revoir'])){
+    $jeu->restart();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>Fight club</title>
 </head>
 <body>
-<h1>Alerte cobra</h1>
+<h1>Fight club</h1>
 <div>
 
 </div>
@@ -53,15 +56,18 @@ if(!$jeu->started()){
     <?php
     if($jeu->ended()){
         ?>
-        <a href="index.php">Recommencer</a>
+        <form method="POST">
+            <button type="submit" name="revoir">revoir</button>
+        </form>
+        <a href="index.php">faire une autre partie</a>
         <?php } ?>
         
         </body>
         </html>
         
         <?php 
-        if(!$jeu->ended()){
+        
             $_SESSION['game'] = serialize($jeu);
-        }
+        
         
         

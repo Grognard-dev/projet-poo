@@ -22,5 +22,10 @@ class Magicien extends Personnage
         return 'lance une boule de feu';
     }
 
+    public function reset() 
+    {
+        $this->vie = 80;
+        $this->randomizer->reset();
+    }
 
 }

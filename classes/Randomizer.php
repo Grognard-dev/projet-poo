@@ -25,4 +25,10 @@ class Randomizer{
     {
         $this->init();
     }
+
+    public function reset()
+    {
+        $this->compteur = 0;
+        $this->init();
+    }
 }

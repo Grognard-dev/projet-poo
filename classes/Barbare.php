@@ -20,5 +20,9 @@ class Barbare extends Personnage
         return 'frappe avec sa hache';
     }
 
-
+    public function reset() 
+    {
+        $this->vie = 150;
+        $this->randomizer->reset();
+    }
 }

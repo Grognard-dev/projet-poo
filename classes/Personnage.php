@@ -68,6 +68,12 @@ abstract class Personnage{
         $this->experience = $this->experience + 1;
     }
 
+    public function reset() 
+    {
+        $this->vie = 100;
+        $this->randomizer->reset();
+    }
+
   abstract  public function getDescription();
 
   abstract public function getAttaque();

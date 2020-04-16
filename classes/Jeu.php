@@ -56,7 +56,7 @@ class Jeu
             }else{
                 $this->afficher($this->perso2->getDescription().' gagne avec '.$this->perso2->getVie()." PV et gagne ".$this->perso2->gagnerExperience().$this->perso2->getExperience().' XP ');
             }
-            echo '<a href="https://lefevre.simplon-charleville.fr/projet_poo/index.php?seed='.$this->randomiseur->seed.'">revoir le match</a>';
+            
         }
         
         public function afficherMenaces(){
@@ -105,7 +105,14 @@ class Jeu
                 echo $deuxiemefrappeur->getDescription().' est mort<br>';
             }
         }
-        
+        public function restart()
+        {
+            $this->tour = 0;
+            $this->randomiseur->reset();
+            $this->perso->reset();
+            $this->perso2->reset();
+            $this->infostours = [];
+        }
         
 }
     
