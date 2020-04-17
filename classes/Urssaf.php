@@ -1,32 +1,32 @@
 <?php
 require_once 'Personnage.php';
 
-class Magicien extends Personnage 
+class Urssaf extends Personnage 
 {
-    protected $vie = 80;
-     protected $defense = 15;
+    protected $vie = 999;
+    protected $defense = 999;
 
      public function degats(Personnage $perso)
     {
-        return $this->randomizer->rand(15,75);
+        return $this->randomizer->rand(99,100);
     }
 
     public function getDescription()
     {
         
-        return $this->getNom().' le Magicien ';
+        return $this->getNom().' Agent de Urssaf ';
 
     }
 
     public function getAttaque()
     {
-        return 'lance une boule de feu';
+        return 'Envoye la facture';
     }
 
     public function reset() 
     {
-        $this->vie = 80;
-         $this->defense = 15;
+        $this->vie = 999;
+         $this->defense = 999;
         $this->randomizer->reset();
     }
 

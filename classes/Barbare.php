@@ -4,6 +4,7 @@ require_once 'Personnage.php';
 class Barbare extends Personnage 
 {
     protected $vie = 150;
+     protected $defense = 50;
 
      public function degats(Personnage $perso)
     {
@@ -23,6 +24,7 @@ class Barbare extends Personnage
     public function reset() 
     {
         $this->vie = 150;
+         $this->defense = 50;
         $this->randomizer->reset();
     }
 }

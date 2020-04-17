@@ -3,6 +3,7 @@ require 'boot.php';
 require_once 'classes/Jeu.php';
 require_once 'classes/Magicien.php';
 require_once 'classes/Barbare.php';
+require_once 'classes/Urssaf.php';
 require_once 'classes/Randomizer.php';
 
 

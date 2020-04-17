@@ -3,15 +3,19 @@ require 'boot.php';
 require_once 'classes/Jeu.php';
 require_once 'classes/Magicien.php';
 require_once 'classes/Barbare.php';
+require_once 'classes/Urssaf.php';
 require_once 'classes/Randomizer.php';
 
 function personnage($classe,$nom,$randomizer){
 
     if($classe == 'Magicien'){
-        return  new Magicien($nom, '',$randomizer);
+        return  new Magicien($nom, 'SKWALALA',$randomizer);
         }
         if($classe == 'Barbare'){
-            return new Barbare($nom,'',$randomizer);
+            return new Barbare($nom,'CROM !!! ',$randomizer);
+        }
+         if($classe == 'Urssaf'){
+            return new Urssaf($nom,'Tu va payer !',$randomizer);
         }
 }
 
@@ -53,6 +57,7 @@ if(isset($_POST['button'])){
     <select name="classe" id="classe" >
         <option>Magicien</option>
         <option>Barbare</option>
+        <option>Urssaf</option>
         </select>
     <br>
     <label for="nom2">Nom personnage</label>
@@ -61,6 +66,7 @@ if(isset($_POST['button'])){
     <select name="classe2" id="classe2">
         <option>Magicien</option>
         <option>Barbare</option>
+        <option>Urssaf</option>
     </select>
     <button type="submit" name="button">Fight!</button>
   <?=  $erreur ?>
