@@ -40,12 +40,12 @@ class Jeu
             1 =>[
                 "degats" => $subit_perso1,
                 "vie" => $this->perso->getVie(),
-                "defense" =>$this->perso->getDefense()
+                "defense" => $this->perso->getDefense(),
             ],
             2 =>[
                 "degats" => $subit_perso2,
                 "vie" => $this->perso2->getVie(),
-                "defense" =>$this->perso2->getDefense()
+                "defense" => $this->perso2->getDefense(),
                 ]
             ];
             $this->afficherEtatdutour($this->infostours[$this->tour],$this->tour);
@@ -56,8 +56,7 @@ class Jeu
             if($this->perso->vivant()){
                  $this->afficher($this->perso->getDescription().' gagne avec '.' '.$this->perso->Armure().' Armure et'.$this->perso->getVie()." PV et gagne ".$this->perso->getExperience().' XP ');
             }else{
-                $this->afficher($this->perso2->getDescription().' gagne avec '.' '.$this->perso2->Armure().' Armure et'.
-                $this->perso2->getVie()." PV et gagne ".$this->perso2->getExperience().' XP ');
+                $this->afficher($this->perso2->getDescription().' gagne avec '.' '.$this->perso2->Armure().' Armure et'.$this->perso2->getVie()." PV et gagne ".$this->perso2->getExperience().' XP ');
             }
             
         }
@@ -97,10 +96,10 @@ class Jeu
             echo ' tour: '.$numero.'<br>';
             echo $premierfrappeur->getDescription().' '.$premierfrappeur->getAttaque().' est fait '.$etat[$index1er]['degats'].' degats '.' <br> ';
             if($deuxiemefrappeur->vivant()){
-                echo $deuxiemefrappeur->getDescription().' a encore '.$this->perso2->Armure().' '.$etat[$index2eme]['vie'].' point de vie '.'<br><br>';
+                echo $deuxiemefrappeur->getDescription().' a encore '.$etat[$index2eme]['defense'].' '.$etat[$index2eme]['vie'].' point de vie '.'<br><br>';
                 echo $deuxiemefrappeur->getDescription().' '.$deuxiemefrappeur->getAttaque().'  '.' est fait '.$etat[$index2eme]['degats'].' degats '.' <br> ';
                 if($premierfrappeur->vivant()){
-                    echo $premierfrappeur->getDescription().' a encore '.$this->perso->Armure().' '.$etat[$index1er]['vie'].' point de vie '.'<br><br>';
+                    echo $premierfrappeur->getDescription().' a encore '.$etat[$index1er]['defense'].' '.$etat[$index1er]['vie'].' point de vie '.'<br><br>';
                 }else{
                     echo $premierfrappeur->getDescription().' est mort<br>';
                 }

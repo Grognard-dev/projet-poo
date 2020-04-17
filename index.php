@@ -30,7 +30,7 @@ if(isset($_POST['button'])){
     }else{
         $randomizer = new Randomizer($_GET['seed']??rand());
         $perso = personnage($classe1,$nom1,$randomizer);
-        $perso2=personnage($classe2,$nom2,$randomizer);
+        $perso2 = personnage($classe2,$nom2,$randomizer);
          
          $jeu = new Jeu($perso,$perso2,$randomizer);
           $_SESSION['game'] = serialize($jeu);

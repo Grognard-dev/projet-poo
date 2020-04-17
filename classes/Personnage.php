@@ -3,7 +3,7 @@
 abstract class Personnage{
     protected $nom;
     protected $vie = 100;
-    protected $defense = 100;
+    protected $defense ;
     protected $menace ;
     protected $experience = 0;
     protected $randomizer;
@@ -35,22 +35,21 @@ abstract class Personnage{
             throw new Exception('Un personnage mort , ne peut pas frapper');
         }
         $degats = $this->degats($perso);
-
-
-        if($this->Armure()){
-            $perso->defense = $perso->defense - $degats;
-             
+        
+        if($perso->Armure()){
+             $perso->defense = $perso->defense - $degats;
         }else{
             $perso->vie = $perso->vie - $degats;
         }
         
         return $degats;
     }
-
-    public function Armure(){
+    
+    public function Armure()
+    {
         return ($this->defense > 0);
     }
-
+    
     abstract public function degats(Personnage $perso);
     
     
@@ -63,6 +62,12 @@ abstract class Personnage{
     {
         return  $this->vie;
     }
+
+      public function getDefense()
+    {
+        return  $this->defense;
+    }
+
     public function getNom()
     {
         return $this->nom;
@@ -73,21 +78,16 @@ abstract class Personnage{
         return $this->experience;
     }
     
-    public function getDefense()
-    {
-        return $this->defense;
-    }
-
     public function reset() 
     {
         $this->vie = 100;
         $this->defense = 100;
         $this->randomizer->reset();
     }
-
-  abstract  public function getDescription();
-
-  abstract public function getAttaque();
-
+    
+    abstract  public function getDescription();
+    
+    abstract public function getAttaque();
+    
 }
 
