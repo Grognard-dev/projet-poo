@@ -38,6 +38,10 @@ abstract class Personnage{
         
         if($perso->Armure()){
              $perso->defense = $perso->defense - $degats;
+             if(!$perso->Armure()){
+                  $perso->defense = 0;
+             }
+             
         }else{
             $perso->vie = $perso->vie - $degats;
         }
@@ -63,9 +67,9 @@ abstract class Personnage{
         return  $this->vie;
     }
 
-      public function getDefense()
+      public function getDefense(Personnage $perso)
     {
-        return  $this->defense;
+         return  $perso->defense;
     }
 
     public function getNom()

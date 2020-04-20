@@ -3,8 +3,8 @@ require_once 'Personnage.php';
 
 class Barbare extends Personnage 
 {
-    protected $vie = 150;
-     protected $defense = 50;
+    public $vie = 150;
+     public $defense = 50;
 
      public function degats(Personnage $perso)
     {

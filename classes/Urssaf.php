@@ -4,7 +4,7 @@ require_once 'Personnage.php';
 class Urssaf extends Personnage 
 {
     protected $vie = 999;
-    protected $defense = 999;
+    public $defense = 999;
 
      public function degats(Personnage $perso)
     {

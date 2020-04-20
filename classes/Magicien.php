@@ -4,7 +4,7 @@ require_once 'Personnage.php';
 class Magicien extends Personnage 
 {
     protected $vie = 80;
-     protected $defense = 15;
+     public $defense = 15;
 
      public function degats(Personnage $perso)
     {
